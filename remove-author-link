@@ -31,10 +31,6 @@ function remove_post_author_posts_link( $output ) {
 		$output .= sprintf( '<span %s>', genesis_attr( 'entry-author-name' ) );
 		$output .= esc_html( $author );
 		$output .= '</span></a>' . $atts['after'] . '</span>';
-	} else {
-		$link   = sprintf( '<a rel="author">%s</a>', esc_url( $url ), esc_html( $author ) );
-		$output = sprintf( '<span class="author vcard">%2$s<span class="fn">%1$s</span>%3$s</span>', $link, $atts['before'], $atts['after'] );
-	}
 
 	return $output;
 
