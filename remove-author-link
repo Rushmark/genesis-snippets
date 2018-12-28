@@ -1,8 +1,5 @@
 add_filter( 'genesis_post_author_posts_link_shortcode', 'remove_post_author_posts_link', 10, 1 );
-/**
- * @author  Brad Dalton
- * @link    https://wp.me/p1lTu0-gX9
- */
+
 function remove_post_author_posts_link( $output ) {
 
 	if ( ! post_type_supports( get_post_type(), 'author' ) ) {
@@ -20,18 +17,18 @@ function remove_post_author_posts_link( $output ) {
 		'before' => '',
 	);
 
-	$atts = shortcode_atts( $defaults, $atts, 'post_author_posts_link' );
+	$atts = shortcode_atts( $defaults, 'post_author_posts_link' );
 
 	$url = '';
 
 	if ( genesis_html5() ) {
 		$output  = sprintf( '<span %s>', genesis_attr( 'entry-author' ) );
-		$output .= $atts['before'];
-		$output .= sprintf( ' ', $url, genesis_attr( 'entry-author-link' ) );
+		$output .= sprintf( $url, genesis_attr( 'entry-author-link' ) );
 		$output .= sprintf( '<span %s>', genesis_attr( 'entry-author-name' ) );
 		$output .= esc_html( $author );
-		$output .= '</span>' . $atts['after'] . '</span>';
-
+		$output .= '</span>' . '</span>';
+	} 
+	
 	return $output;
 
 }
