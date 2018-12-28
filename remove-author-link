@@ -1,0 +1,41 @@
+add_filter( 'genesis_post_author_posts_link_shortcode', 'remove_post_author_posts_link', 10, 1 );
+/**
+ * @author  Brad Dalton
+ * @link    https://wp.me/p1lTu0-gX9
+ */
+function remove_post_author_posts_link( $output ) {
+
+	if ( ! post_type_supports( get_post_type(), 'author' ) ) {
+		return '';
+	}
+
+	$author = get_the_author();
+
+	if ( ! $author ) {
+		return '';
+	}
+
+	$defaults = array(
+		'after'  => '',
+		'before' => '',
+	);
+
+	$atts = shortcode_atts( $defaults, $atts, 'post_author_posts_link' );
+
+	$url = '';
+
+	if ( genesis_html5() ) {
+		$output  = sprintf( '<span %s>', genesis_attr( 'entry-author' ) );
+		$output .= $atts['before'];
+		$output .= sprintf( '<a %s>', $url, genesis_attr( 'entry-author-link' ) );
+		$output .= sprintf( '<span %s>', genesis_attr( 'entry-author-name' ) );
+		$output .= esc_html( $author );
+		$output .= '</span></a>' . $atts['after'] . '</span>';
+	} else {
+		$link   = sprintf( '<a rel="author">%s</a>', esc_url( $url ), esc_html( $author ) );
+		$output = sprintf( '<span class="author vcard">%2$s<span class="fn">%1$s</span>%3$s</span>', $link, $atts['before'], $atts['after'] );
+	}
+
+	return $output;
+
+}
