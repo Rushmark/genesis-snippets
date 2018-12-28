@@ -27,10 +27,10 @@ function remove_post_author_posts_link( $output ) {
 	if ( genesis_html5() ) {
 		$output  = sprintf( '<span %s>', genesis_attr( 'entry-author' ) );
 		$output .= $atts['before'];
-		$output .= sprintf( '<a %s>', $url, genesis_attr( 'entry-author-link' ) );
+		$output .= sprintf( ' ', $url, genesis_attr( 'entry-author-link' ) );
 		$output .= sprintf( '<span %s>', genesis_attr( 'entry-author-name' ) );
 		$output .= esc_html( $author );
-		$output .= '</span></a>' . $atts['after'] . '</span>';
+		$output .= '</span>' . $atts['after'] . '</span>';
 
 	return $output;
 
